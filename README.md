@@ -1,0 +1,1 @@
+# trigoyuk-trigonometri
