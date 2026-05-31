@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Media Trigonometri</title>
+    <style>
+.fadeOutIntro{
+    opacity:0;
+}
+#introVideo{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100vw;
+    height:100vh;
+    object-fit:cover;
+    z-index:10000;
+    opacity:1;
+    transition:opacity 1s ease;
+}
+    body.lock-scroll{
+        overflow: hidden;
+        height: 100vh;
+        }
+
+    #videoMateri{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100vw;
+    height:100vh;
+    object-fit:cover;
+    display:block;
+    margin:0;
+    border-radius:0;
+    opacity:0;
+    transition:opacity 1.5s ease;
+    z-index:1;
+}
+.showMateri{
+    opacity:1 !important;
+}
+
+.fadeOut{
+    opacity: 0;
+}
+
+#blackScreen{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100vw;
+    height:100vh;
+    background:black;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity 0.8s ease;
+    z-index:9000;
+}
+
+#blackScreen.show{
+    opacity:1;
+}
+
+#nextContainer{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    position:fixed;
+    top:0;
+    left:0;
+    width:100vw;
+    height:100vh;
+
+    opacity:0;
+    visibility:hidden;
+
+    background:url("background container.png")center center/cover no-repeat;
+
+    transition:opacity 1.2s ease;
+    z-index:20000;
+}
+
+#nextContainer::before{
+    content:"";
+    position:absolute;
+    inset:0;
+
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+
+    background:rgba(0,0,0,0.35);
+}
+
+#nextContainer.show{
+    opacity:1;
+    visibility:visible;
+}
+
+#nextContainer.show #btnNext{
+    transform:translateY(0);
+}
+
+#btnNext{
+    padding:18px 45px;
+    font-size:26px;
+    font-weight:bold;
+    color:white;
+    cursor:pointer;
+    border:none;
+    border-radius:50px;
+    background:linear-gradient(135deg,#2E7D32,#4CAF50,#81C784);
+    box-shadow:0 8px 20px rgba(46,125,50,0.4);
+    transform:translateY(40px);
+    transition:all 1s ease;
+    position:relative;
+    z-index:2;
+}
+
+#btnNext:hover{
+    transform:translateY(0) scale(1.08);
+}
+    </style>
+</head>
+<body>
+<video id="introVideo"
+       autoplay
+       controls
+       controlsList="nodownload noplaybackrate nofullscreen"
+       disablePictureInPicture>
+    <source src="video opening.mp4" type="video/mp4">
+</video>
+
+<video id="videoMateri"
+       controls
+       controlsList="nodownload noplaybackrate nofullscreen"
+       disablePictureInPicture>
+    <source src="materi.mp4" type="video/mp4">
+</video>
+
+<div id="blackScreen"></div>
+
+<div id="nextContainer">
+    <button id="btnNext"
+        onclick="window.location.href='https://sivaalma.my.canva.site/lembar-presentasi-soal'">
+        🌿 NEXT ADVENTURE 🌿
+    </button>
+</div>
+
+<script>
+const video = document.getElementById("videoMateri");
+const container = document.getElementById("nextContainer");
+const intro = document.getElementById("introVideo");
+
+function stopScroll(e){
+    e.preventDefault();
+}
+
+window.addEventListener("wheel", stopScroll, {passive:false});
+window.addEventListener("touchmove", stopScroll, {passive:false});
+
+const blackScreen = document.getElementById("blackScreen");
+
+let introFadeStarted = false;
+
+intro.addEventListener("timeupdate", function(){
+
+    const sisaWaktu = intro.duration - intro.currentTime;
+
+    // mulai fade 1 detik sebelum video selesai
+    if(!introFadeStarted && sisaWaktu <= 1){
+
+        introFadeStarted = true;
+
+        intro.classList.add("fadeOutIntro");
+        blackScreen.classList.add("show");
+
+        setTimeout(() => {
+            intro.style.display = "none";
+        }, 1000);
+
+        setTimeout(() => {
+
+            video.classList.add("showMateri");
+            video.play();
+
+            blackScreen.classList.remove("show");
+
+        }, 3000)
+    }
+});
+
+video.addEventListener("ended", function(){
+
+    // video perlahan menghilang
+    video.classList.add("fadeOut");
+
+    setTimeout(() => {
+
+        // sembunyikan video
+        video.style.display = "none";
+
+        // tampilkan tombol dengan animasi
+        container.classList.add("show");
+
+    }, 1500);
+
+});
+
+</script>
+
+</body>
+</html>
