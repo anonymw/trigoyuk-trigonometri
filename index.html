@@ -1,147 +1,135 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Media Trigonometri</title>
+    <title>MEDIA TRI GO YUK!</title>
+
+    <link rel="icon" type="image/jpeg" href="logo.png">
+        
     <style>
-.fadeOutIntro{
-    opacity:0;
-}
-#introVideo{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100vw;
-    height:100vh;
-    object-fit:cover;
-    z-index:10000;
-    opacity:1;
-    transition:opacity 1s ease;
-}
-#clickText{
-    position:fixed;
-    bottom:80px;
-    left:50%;
-    transform:translateX(-50%);
-    color:white;
-    font-size:30px;
-    font-weight:bold;
-    z-index:15000;
+    .fadeOutIntro{
+        opacity:0;
+    }
 
-    opacity:0;
-    transition:opacity .3s ease;
+    #introVideo{
+        position:fixed;
+        top:0;
+        left:0;
+        width:100vw;
+        height:100vh;
+        object-fit:cover;
+        z-index:10000;
+        opacity:1;
+        transition:opacity 1s ease;
+    }
 
-    text-shadow:0 0 15px rgba(255,255,255,.8);
+    #clickText{
+        position:fixed;
+        bottom:80px;
+        left:50%;
+        transform:translateX(-50%);
+        color:white;
+        font-size:30px;
+        font-weight:bold;
+        z-index:15000;
+        opacity:0;
+        transition:opacity .3s ease;
+        text-shadow:0 0 15px rgba(255,255,255,.8);
+        animation:melayang 2s infinite ease-in-out;
+    }
 
-    animation:melayang 2s infinite ease-in-out;
-}
+    #clickText{
+        position:fixed;
+        bottom:80px;
+        left:50%;
+        transform:translateX(-50%);
+        font-family:'Trebuchet MS', sans-serif;
+        font-size:34px;
+        font-weight:800;
+        letter-spacing:1px;
+        color:white;
+        opacity:0;
+        transition:opacity .3s ease;
+        z-index:15000;
+        text-shadow:
+            0 0 10px rgba(255,255,255,.8),
+            0 0 20px rgba(255,255,255,.5);
+        animation:melayang 2s ease-in-out infinite;
+    }
 
-#clickText{
-    position:fixed;
-    bottom:80px;
-    left:50%;
-    transform:translateX(-50%);
+    @keyframes melayang{
+        0%{transform:translateX(-50%) translateY(0);}
+        50%{transform:translateX(-50%) translateY(-12px);}
+        100%{transform:translateX(-50%) translateY(0);}
+    }
 
-    font-family:'Trebuchet MS', sans-serif;
-    font-size:34px;
-    font-weight:800;
-    letter-spacing:1px;
+    #petunjukPage{
+        position:fixed;
+        inset:0;
+        z-index:18000;
+        display:none;
+        justify-content:center;
+        align-items:center;
+        background:black;
+    }
 
-    color:white;
+    #petunjukPage img{
+        width:100vw;
+        height:100vh;
+        object-fit:cover;
+    }
 
-    opacity:0;
-    transition:opacity .3s ease;
+    #btnPetunjukNext{
+        position:absolute;
+        bottom:50px;
+        right:50px;
+        padding:18px 45px;
+        font-size:24px;
+        font-weight:bold;
+        color:white;
+        border:none;
+        border-radius:50px;
+        cursor:pointer;
+        background:linear-gradient(
+            135deg,
+            #2E7D32,
+            #4CAF50,
+            #81C784
+        );
 
-    z-index:15000;
+        box-shadow:
+            0 8px 20px rgba(46,125,50,.4);
+        opacity:0;
+        transition:
+            opacity .5s ease,
+            transform .3s ease;
+    }
 
-    text-shadow:
-        0 0 10px rgba(255,255,255,.8),
-        0 0 20px rgba(255,255,255,.5);
+    #btnPetunjukNext.show{
+        opacity:1;
+    }
 
-    animation:melayang 2s ease-in-out infinite;
-}
+    #btnPetunjukNext:hover{
+        transform:scale(1.08);
+    }
 
-@keyframes melayang{
-    0%{transform:translateX(-50%) translateY(0);}
-    50%{transform:translateX(-50%) translateY(-12px);}
-    100%{transform:translateX(-50%) translateY(0);}
-}
-
-#petunjukPage{
-    position:fixed;
-    inset:0;
-    z-index:18000;
-
-    display:none;
-    justify-content:center;
-    align-items:center;
-
-    background:black;
-}
-
-#petunjukPage img{
-    width:100vw;
-    height:100vh;
-    object-fit:cover;
-}
-
-#btnPetunjukNext{
-    position:absolute;
-    bottom:50px;
-    right:50px;
-
-    padding:18px 45px;
-
-    font-size:24px;
-    font-weight:bold;
-
-    color:white;
-
-    border:none;
-    border-radius:50px;
-
-    cursor:pointer;
-
-    background:linear-gradient(
-        135deg,
-        #2E7D32,
-        #4CAF50,
-        #81C784
-    );
-
-    box-shadow:
-        0 8px 20px rgba(46,125,50,.4);
-
-    opacity:0;
-    transition:
-        opacity .5s ease,
-        transform .3s ease;
-}
-
-#btnPetunjukNext.show{
-    opacity:1;
-}
-
-#btnPetunjukNext:hover{
-    transform:scale(1.08);
-}
     body.lock-scroll{
         overflow: hidden;
         height: 100vh;
-        }
+    }
 
     #videoMateri{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100vw;
-    height:100vh;
-    object-fit:cover;
-    display:block;
-    margin:0;
-    border-radius:0;
-    opacity:0;
-    transition:opacity 1.5s ease;
-    z-index:1;
+        position:fixed;
+        top:0;
+        left:0;
+        width:100vw;
+        height:100vh;
+        object-fit:cover;
+        display:block;
+        margin:0;
+        border-radius:0;
+        opacity:0;
+        transition:opacity 1.5s ease;
+        z-index:1;
 }
 .showMateri{
     opacity:1 !important;
@@ -168,7 +156,7 @@
     opacity:1;
 }
 
-#nextContainer{
+    #nextContainer{
     display:flex;
     flex-direction:column;
     justify-content:center;
