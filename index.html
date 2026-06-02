@@ -1,335 +1,777 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-    <title>MEDIA TRI GO YUK!</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MATH FUN BINGO</title>
 
-    <link rel="icon" type="image/jpeg" href="logo.png">
-        
-    <style>
-    .fadeOutIntro{
-        opacity:0;
-    }
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Pacifico&display=swap" rel="stylesheet">
 
-    #introVideo{
-        position:fixed;
-        top:0;
-        left:0;
-        width:100vw;
-        height:100vh;
-        object-fit:cover;
-        z-index:10000;
-        opacity:1;
-        transition:opacity 1s ease;
-    }
-
-    #clickText{
-        position:fixed;
-        bottom:80px;
-        left:50%;
-        transform:translateX(-50%);
-        color:white;
-        font-size:30px;
-        font-weight:bold;
-        z-index:15000;
-        opacity:0;
-        transition:opacity .3s ease;
-        text-shadow:0 0 15px rgba(255,255,255,.8);
-        animation:melayang 2s infinite ease-in-out;
-    }
-
-    #clickText{
-        position:fixed;
-        bottom:80px;
-        left:50%;
-        transform:translateX(-50%);
-        font-family:'Trebuchet MS', sans-serif;
-        font-size:34px;
-        font-weight:800;
-        letter-spacing:1px;
-        color:white;
-        opacity:0;
-        transition:opacity .3s ease;
-        z-index:15000;
-        text-shadow:
-            0 0 10px rgba(255,255,255,.8),
-            0 0 20px rgba(255,255,255,.5);
-        animation:melayang 2s ease-in-out infinite;
-    }
-
-    @keyframes melayang{
-        0%{transform:translateX(-50%) translateY(0);}
-        50%{transform:translateX(-50%) translateY(-12px);}
-        100%{transform:translateX(-50%) translateY(0);}
-    }
-
-    #petunjukPage{
-        position:fixed;
-        inset:0;
-        z-index:18000;
-        display:none;
-        justify-content:center;
-        align-items:center;
-        background:black;
-    }
-
-    #petunjukPage img{
-        width:100vw;
-        height:100vh;
-        object-fit:cover;
-    }
-
-    #btnPetunjukNext{
-        position:absolute;
-        bottom:50px;
-        right:50px;
-        padding:18px 45px;
-        font-size:24px;
-        font-weight:bold;
-        color:white;
-        border:none;
-        border-radius:50px;
-        cursor:pointer;
-        background:linear-gradient(
-            135deg,
-            #2E7D32,
-            #4CAF50,
-            #81C784
-        );
-
-        box-shadow:
-            0 8px 20px rgba(46,125,50,.4);
-        opacity:0;
-        transition:
-            opacity .5s ease,
-            transform .3s ease;
-    }
-
-    #btnPetunjukNext.show{
-        opacity:1;
-    }
-
-    #btnPetunjukNext:hover{
-        transform:scale(1.08);
-    }
-
-    body.lock-scroll{
-        overflow: hidden;
-        height: 100vh;
-    }
-
-    #videoMateri{
-        position:fixed;
-        top:0;
-        left:0;
-        width:100vw;
-        height:100vh;
-        object-fit:cover;
-        display:block;
-        margin:0;
-        border-radius:0;
-        opacity:0;
-        transition:opacity 1.5s ease;
-        z-index:1;
-}
-.showMateri{
-    opacity:1 !important;
+<style>
+body{
+  margin:0;
+  padding:0;
+  font-family:'Poppins',sans-serif;
+  background:#4da6ff;
+  color:white;
 }
 
-.fadeOut{
-    opacity: 0;
+.page{display:none; padding:20px;}
+.active{display:block; animation:fade 0.5s;}
+@keyframes fade{from{opacity:0} to{opacity:1}}
+
+.title{
+  font-family:'Pacifico'; 
+  text-align:center;
+  font-size:50px;
 }
 
-#blackScreen{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100vw;
-    height:100vh;
-    background:black;
+.btn{
+  background:#ff66b2;
+  border:none;
+  padding:10px 15px;
+  border-radius:10px;
+  color:white;
+  cursor:pointer;
+  margin:5px;
+}
+
+.back{position:absolute; top:10px; left:10px;}
+
+.rules-image{
+  width:100%;
+  border-radius:15px;
+  display:block;
+}
+
+@keyframes fadeZoom{
+  from{
     opacity:0;
-    pointer-events:none;
-    transition:opacity 0.8s ease;
-    z-index:9000;
-}
-
-#blackScreen.show{
+    transform:scale(0.9);
+  }
+  to{
     opacity:1;
+    transform:scale(1);
+  }
 }
 
-    #nextContainer{
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-
-    position:fixed;
-    top:0;
-    left:0;
-    width:100vw;
-    height:100vh;
-
-    opacity:0;
-    visibility:hidden;
-
-    background:url("logo.png")center center/cover no-repeat;
-
-    transition:opacity 1.2s ease;
-    z-index:20000;
+.rules-box{
+  background:white;
+  color:black;
+  border-radius:20px;
+  padding:6px;
+  max-width:660px;
+  margin:15px auto;
+  overflow:hidden;
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
 }
 
-#nextContainer::before{
-    content:"";
-    position:absolute;
-    inset:0;
-
-    backdrop-filter:blur(8px);
-    -webkit-backdrop-filter:blur(8px);
-
-    background:rgba(0,0,0,0.35);
+.groups{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+  align-items:center;
 }
 
-#nextContainer.show{
-    opacity:1;
-    visibility:visible;
+.group{
+  width:80%;
+  border:2px dashed white;
+  padding:10px;
+  min-height:120px;
 }
 
-#nextContainer.show #btnNext{
-    transform:translateY(0);
+.card{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  width:70px;
+  height:70px;
+
+  background:white;
+  color:black;
+
+  margin:4px;
+
+  border-radius:10px;
+
+  font-size:24px;
+  font-weight:bold;
+
+  cursor:pointer;
+
+  box-sizing:border-box;
 }
 
-#btnNext{
-    padding:18px 45px;
-    font-size:26px;
-    font-weight:bold;
-    color:white;
-    cursor:pointer;
-    border:none;
-    border-radius:50px;
-    background:linear-gradient(135deg,#2E7D32,#4CAF50,#81C784);
-    box-shadow:0 8px 20px rgba(46,125,50,0.4);
-    transform:translateY(40px);
-    transition:all 1s ease;
-    position:relative;
-    z-index:2;
+/* KARTU DI KOLOM KELOMPOK */
+.group .card{
+  width:70px;
+  height:70px;
+
+  font-size:24px;
+  font-weight:bold;
+
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  text-align:center;
 }
 
-#btnNext:hover{
-    transform:translateY(0) scale(1.08);
+#deck{
+  position:relative;
+  width:140px;
+  height:180px;
+  margin:20px auto;
 }
-    </style>
+.deck-card{
+  position:absolute;
+  width:60px;
+  height:80px;
+  background:white;
+  color:black;
+  border-radius:8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:0.6s;
+}
+
+.bingo-box{
+  background:white;
+  color:black;
+  border-radius:15px;
+  padding:10px;
+  max-width:300px;
+  margin:10px auto;
+}
+
+.game-theme{
+  min-height:100vh;
+}
+
+.bingo{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:4px;
+}
+.cell{
+  aspect-ratio:1/1;
+  background:#66ccff;
+  border-radius:6px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.marked:root{
+  --bgColor:#4da6ff;
+  --boxColor:white;
+  --cellA:#e7c1df;
+  --cellB:#c8d5ee;
+  --markColor:#ff66b2;
+}
+
+.marked{
+  background:var(--markColor) !important;
+  color:white;
+}
+
+.work{
+  border:2px dashed white;
+  min-height:60px;
+  padding:10px;
+}
+.pick-container{
+  display:flex;
+  justify-content:center;
+  gap:40px;
+  margin-top:100px;
+  flex-wrap:wrap;
+}
+
+.flip-card{
+  width:250px;
+  height:350px;
+  perspective:1000px;
+  cursor:pointer;
+}
+
+.flip-inner{
+  width:100%;
+  height:100%;
+  position:relative;
+  transition:transform 0.8s;
+  transform-style:preserve-3d;
+}
+
+.flip-inner.flipped{
+  transform:rotateY(180deg);
+}
+
+.flip-front,
+.flip-back{
+  position:absolute;
+  width:100%;
+  height:100%;
+  backface-visibility:hidden;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.flip-front{
+  background:white;
+  color:#ff66b2;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:100px;
+  font-weight:bold;
+}
+
+.flip-back{
+  transform:rotateY(180deg);
+  background:white;
+}
+
+.flip-back img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.win{
+  text-align:center;
+  margin-top:30vh;
+  font-size:30px;
+}
+
+@media(max-width:700px){
+  .groups{flex-direction:column;}
+}
+</style>
 </head>
+
 <body>
-<video id="introVideo"
-       autoplay
-       controls
-       controlsList="nodownload noplaybackrate nofullscreen"
-       disablePictureInPicture>
-    <source src="video opening.mp4" type="video/mp4">
-</video>
 
-<div id="clickText">
-    ✨ KLIK DIMANA SAJA UNTUK MEMULAI PETUALANGAN ✨
+<!-- HOME -->
+<div id="home" class="page active">
+
+  <h1 class="title">Math Fun Bingo</h1>
+
+  <!-- GAMBAR -->
+  <div style="text-align:center; margin:20px 0;">
+    <img 
+      src="OPERASI BILANGAN.png"
+      alt="Logo Game"
+      style="
+        width:300px;
+        border-radius:20px;
+      "
+    >
+  </div>
+
+  <center>
+    <button class="btn" onclick="start()">
+      START GAME
+    </button>
+  </center>
+
 </div>
 
-<div id="petunjukPage">
-    <img src="petunjuk penggunaan.jpeg" alt="Petunjuk Penggunaan">
-
-    <button id="btnPetunjukNext">
-        🚀 LANJUT KE MATERI 🚀
-    </button>
+<!-- LOADING -->
+<div id="loading" class="page">
+  <h2 style="text-align:center; margin-top:40vh;">Loading...</h2>
 </div>
 
-<video id="videoMateri"
-       controls
-       controlsList="nodownload noplaybackrate nofullscreen"
-       disablePictureInPicture>
-    <source src="video ict fix kompresi.mp4" type="video/mp4">
-</video>
+<!-- RULES -->
+<div id="rules" class="page">
 
-<div id="blackScreen"></div>
+  <button class="btn back" onclick="show('home')">BACK</button>
 
-<div id="nextContainer">
-    <button id="btnNext"
-        onclick="window.location.href='https://sivaalma.my.canva.site/salinan-dari-1-5-salinan'">
-        🌿 NEXT ADVENTURE 🌿
-    </button>
+  <h1 class="title">Aturan Permainan</h1>
+
+  <div class="rules-box">
+
+    <img 
+      src="Peraturan Kelas Poster Biru dan Putih Ilustratif Sederhna (2).png"
+      class="rules-image"
+      alt="Aturan Permainan"
+    >
+
+  </div>
+
+  <center>
+    <button class="btn" onclick="goDistribute()">LANJUT</button>
+  </center>
+
+</div>
+
+<!-- DISTRIBUTE -->
+<div id="distribute" class="page">
+  <button class="btn back" onclick="show('rules')">BACK</button>
+  <h1 class="title">Game Operasi Bilangan</h1>
+
+  <div id="deck"></div>
+
+  <div class="groups">
+    <div class="group" id="g1">Kelompok 1</div>
+    <div class="group" id="g2">Kelompok 2</div>
+  </div>
+
+  <center><button class="btn" onclick="goPick()">LESGOOO</button></center>
+</div>
+
+<!-- GAME -->
+ <!-- PICK BINGO -->
+<div id="pickBingo" class="page">
+
+  <button class="btn back"
+          onclick="show('distribute')">
+    BACK
+  </button>
+
+  <h1 class="title">Pilih Kartu Bingo</h1>
+
+  <div class="pick-container">
+
+    <div class="flip-card" onclick="chooseBingo(1)">
+      <div class="flip-inner" id="flip1">
+
+        <div class="flip-front">
+          ?
+        </div>
+
+        <div class="flip-back">
+          <img src="Kartu Bingo Pribadi Klasik Gaya Amerika Merah Pastel Biru Pastel Krem-1.png">
+        </div>
+
+      </div>
+    </div>
+
+    <div class="flip-card" onclick="chooseBingo(2)">
+      <div class="flip-inner" id="flip2">
+
+        <div class="flip-front">
+          ?
+        </div>
+
+        <div class="flip-back">
+          <img src="Kartu Bingo Pribadi Klasik Gaya Amerika Merah Pastel Biru Pastel Krem-2.png">
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<div id="game" class="page game-theme">
+<button class="btn back" onclick="show('pickBingo')">BACK</button>
+
+  <h2 class="title">Game Operasi Bilangan</h2>
+
+  <h3 id="turnInfo"></h3>
+  <p id="score1"></p>
+  <p id="score2"></p>
+
+  <div class="bingo-box" id="bingoBox">
+    <div style="text-align:center;font-weight:bold;">FUN MATH BINGO</div>
+    <div class="bingo" id="bingo"></div>
+  </div>
+
+  <h4>Kartu</h4>
+  <div id="cards"></div>
+
+  <h4>Area Hitung</h4>
+  <div id="work" class="work" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+
+  <center>
+    <button class="btn" onclick="check()">CEK</button>
+    <button class="btn" onclick="resetWork()">RESET</button>
+  </center>
+</div>
+
+<!-- WIN -->
+<div id="win" class="page">
+  <div class="win">BINGO 🎉</div>
+  <p id="winner"></p>
+  <center><button class="btn" onclick="show('home')">BACK HOME</button></center>
 </div>
 
 <script>
-const video = document.getElementById("videoMateri");
-const container = document.getElementById("nextContainer");
-const intro = document.getElementById("introVideo");
-const clickText = document.getElementById("clickText");
-const petunjukPage = document.getElementById("petunjukPage");
-const btnPetunjukNext = document.getElementById("btnPetunjukNext");
 
-function stopScroll(e){
-    e.preventDefault();
+/* NAV */
+function show(id){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
 }
 
-window.addEventListener("wheel", stopScroll, {passive:false});
-window.addEventListener("touchmove", stopScroll, {passive:false});
+function start(){
 
-let selesai1Kali = false;
+  // RESET PILIHAN BINGO
+  selectedBingo = null;
 
-intro.loop = true;
+  // TUTUP SEMUA KARTU
+  document
+    .querySelectorAll(".flip-inner")
+    .forEach(c=>{
+      c.classList.remove("flipped");
+    });
 
-intro.addEventListener("timeupdate", function(){
+  show("loading");
 
-    if(
-        !selesai1Kali &&
-        intro.currentTime >= intro.duration - 0.2
-    ){
-        selesai1Kali = true;
+  setTimeout(()=>{
+    show("rules");
+  },2000);
+}
 
-        clickText.classList.add("show");
+function goDistribute(){
+  show("distribute");
+  dealCards();
+}
+
+/* DATA */
+const numbers=[1,2,3,4,5,6,7,8,9];
+const ops=["+","-","*","/","^"];
+
+/* MULTI */
+let currentPlayer=1, score1=0, score2=0;
+
+function updateScore(){
+  document.getElementById("score1").innerText="Kelompok 1: "+score1;
+  document.getElementById("score2").innerText="Kelompok 2: "+score2;
+  document.getElementById("turnInfo").innerText="Giliran: Kelompok "+currentPlayer;
+}
+
+/* 🔥 ANIMASI SUPER REAL */
+function dealCards(){
+  let deck=document.getElementById("deck");
+  let g1=document.getElementById("g1");
+  let g2=document.getElementById("g2");
+
+  deck.innerHTML="";
+  g1.innerHTML="<b>Kelompok 1</b><br>";
+  g2.innerHTML="<b>Kelompok 2</b><br>";
+
+  // SET KARTU UTUH UNTUK MASING-MASING KELOMPOK
+  let group1Cards=[...numbers,...ops];
+  let group2Cards=[...numbers,...ops];
+
+  // GABUNG UNTUK ANIMASI
+  let all=[
+    ...group1Cards.map(v=>({value:v,group:1})),
+    ...group2Cards.map(v=>({value:v,group:2}))
+  ];
+
+  let deckCards=[];
+
+  // MEMBUAT TUMPUKAN KARTU
+  all.forEach((item,i)=>{
+    let c=document.createElement("div");
+    c.className="deck-card";
+    c.innerText=item.value;
+
+    c.dataset.group=item.group;
+
+    c.style.top=60+i*0.4+"px";
+    c.style.left=50+i*0.4+"px";
+
+    deck.appendChild(c);
+    deckCards.push(c);
+  });
+
+  // ANIMASI ACAK KOCOK
+  setTimeout(()=>{
+    deckCards.forEach(c=>{
+      let x=Math.random()*100-50;
+      let y=Math.random()*100-50;
+
+      c.style.transform=
+      `translate(${x}px,${y}px) rotate(${Math.random()*360}deg)`;
+    });
+  },600);
+
+  // KEMBALI KE TUMPUKAN
+  setTimeout(()=>{
+    deckCards.forEach((c,i)=>{
+      c.style.transform="translate(0,0)";
+      c.style.top=60+i*0.3+"px";
+      c.style.left=50+i*0.3+"px";
+    });
+  },1500);
+
+  // BAGIKAN KARTU
+  setTimeout(()=>{
+
+    deckCards.forEach((c,i)=>{
+
+      setTimeout(()=>{
+
+        let target=
+        c.dataset.group=="1"
+        ? g1
+        : g2;
+
+        let clone=c.cloneNode(true);
+        deck.appendChild(clone);
+
+        let rectT=target.getBoundingClientRect();
+        let rectD=deck.getBoundingClientRect();
+
+        let x=rectT.left-rectD.left+20;
+        let y=rectT.top-rectD.top+20;
+
+        clone.style.transform=
+        `translate(${x}px,${y}px)`;
+
+        setTimeout(()=>{
+
+          let newCard=document.createElement("div");
+          newCard.className="card";
+          newCard.innerText=clone.innerText;
+
+          target.appendChild(newCard);
+
+          clone.remove();
+
+        },400);
+
+      },i*100);
+
+    });
+
+    setTimeout(()=>{
+      deck.innerHTML="";
+    },deckCards.length*100+1000);
+
+  },2300);
+}
+
+/* GAME INIT */
+let selectedBingo = 1;
+
+function goPick(){
+
+  show("pickBingo");
+
+  // RESET SEMUA KARTU
+  document
+    .querySelectorAll(".flip-inner")
+    .forEach(c=>{
+      c.classList.remove("flipped");
+    });
+
+  // BUKA KARTU YANG SUDAH DIPILIH
+  if(selectedBingo){
+
+    let flip =
+    document.getElementById(
+      selectedBingo===1
+      ? "flip1"
+      : "flip2"
+    );
+
+    flip.classList.add("flipped");
+  }
+} 
+
+function chooseBingo(num){
+
+  selectedBingo = num;
+
+  let flip =
+  document.getElementById(
+    num===1 ? "flip1" : "flip2"
+  );
+
+  flip.classList.add("flipped");
+
+  setTimeout(()=>{
+    goGame();
+  },1200);
+}
+
+function applyBingoTheme(){
+
+  let gamePage =
+  document.getElementById("game");
+
+  let bingoBox =
+  document.getElementById("bingoBox");
+
+  if(selectedBingo===1){
+
+    gamePage.style.background="#8FB1E3";
+
+    bingoBox.style.background="#8FB1E3";
+
+    bingoBox.style.border=
+    "8px solid #F5EFD9";
+
+  }else{
+
+    gamePage.style.background="#D6A8E8";
+
+    bingoBox.style.background="#D6A8E8";
+
+    bingoBox.style.border=
+    "8px solid #F5EFD9";
+
+  }
+
+}
+
+function goGame(){
+
+  show("game");
+
+  applyBingoTheme();
+
+  init();
+
+}
+
+function init(){
+  createBingo();
+  createCards();
+  score1=0; score2=0; currentPlayer=1;
+  updateScore();
+}
+
+/* BINGO */
+function createBingo(){
+
+  let data;
+
+  if(selectedBingo===1){
+
+    data=[
+      [12,45,7,36,20],
+      [50,9,64,15,48],
+      [24,17,"FREE",32,10],
+      [13,81,25,6,56],
+      [30,18,40,27,14]
+    ];
+
+  }else{
+
+    data=[
+      [1,23,34,55,68],
+      [4,20,36,59,66],
+      [6,25,"FREE",53,73],
+      [11,29,37,56,63],
+      [5,18,44,46,70]
+    ];
+
+  }
+
+  let b=document.getElementById("bingo");
+  b.innerHTML="";
+
+  data.forEach(r=>{
+    r.forEach(v=>{
+      let c=document.createElement("div");
+c.className="cell";
+c.innerText=v;
+
+let index=b.children.length;
+
+if(index%2===0){
+  c.style.background="#e7c1df";
+}else{
+  c.style.background="#c8d5ee";
+}
+
+      if(v==="FREE"){
+  c.classList.add("marked");
+}
+
+      b.appendChild(c);
+    });
+  });
+}
+
+/* CARDS */
+function createCards(){
+  let area=document.getElementById("cards");
+  area.innerHTML="";
+  [...numbers,...ops].forEach(v=>{
+    let c=document.createElement("div");
+    c.className="card";
+    c.innerText=v;
+    c.draggable=true;
+    c.ondragstart=drag;
+    area.appendChild(c);
+  });
+}
+
+function allowDrop(e){e.preventDefault();}
+function drag(e){e.dataTransfer.setData("text",e.target.innerText);}
+
+function drop(e){
+  e.preventDefault();
+  let val=e.dataTransfer.getData("text");
+
+  let c=document.createElement("div");
+  c.className="card";
+  c.innerText=val;
+  c.onclick=function(){this.remove();};
+
+  document.getElementById("work").appendChild(c);
+}
+
+function resetWork(){work.innerHTML="";}
+
+function check(){
+  let exp=work.innerText;
+
+  try{
+    let result=eval(exp.replace("^","**"));
+    let found=false;
+
+    document.querySelectorAll(".cell").forEach(cell=>{
+      if(cell.innerText==result){
+        cell.classList.add("marked");
+        if(currentPlayer===1) score1+=10;
+        else score2+=10;
+        found=true;
+      }
+    });
+
+    if(!found){
+      if(currentPlayer===1) score1+=2;
+      else score2+=2;
     }
-});
 
-document.addEventListener("click", function(){
+    updateScore();
+    checkWin();
+    currentPlayer=currentPlayer===1?2:1;
+    resetWork();
 
-    if(!selesai1Kali) return;
+  }catch{
+    alert("Operasi salah!");
+  }
+}
 
-    intro.pause();
-    intro.style.display = "none";
+function checkWin(){
+  let c=document.querySelectorAll(".cell");
 
-    clickText.style.display = "none";
+  for(let i=0;i<5;i++){
+    let h=0,v=0;
+    for(let j=0;j<5;j++){
+      if(c[i*5+j].classList.contains("marked")) h++; else h=0;
+      if(c[j*5+i].classList.contains("marked")) v++; else v=0;
+      if(h>=3||v>=3) return win();
+    }
+  }
+}
 
-    petunjukPage.style.display = "flex";
-
-    setTimeout(() => {
-        btnPetunjukNext.classList.add("show");
-    }, 10000);
-
-}, {once:true});
-
-btnPetunjukNext.addEventListener("click", function(){
-
-    petunjukPage.style.display = "none";
-
-    video.classList.add("showMateri");
-    video.play();
-
-});
-
-video.addEventListener("ended", function(){
-
-    // video perlahan menghilang
-    video.classList.add("fadeOut");
-
-    setTimeout(() => {
-
-        // sembunyikan video
-        video.style.display = "none";
-
-        // tampilkan tombol dengan animasi
-        container.classList.add("show");
-
-    }, 1500);
-
-});
+function win(){
+  let text=score1>score2?"Kelompok 1 Menang!":"Kelompok 2 Menang!";
+  winner.innerText=text+" | "+score1+" - "+score2;
+  show("win");
+}
 
 </script>
-
 </body>
 </html>
