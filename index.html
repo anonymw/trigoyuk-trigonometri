@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MEDIA TRI GO YUK!</title>
 
     <link rel="icon" type="image/jpeg" href="logo.png">
@@ -210,12 +211,90 @@
 #btnNext:hover{
     transform:translateY(0) scale(1.08);
 }
+
+/* =========================
+   TABLET (iPad)
+========================= */
+@media (max-width:1024px){
+
+    #clickText{
+        font-size:28px;
+        width:90%;
+    }
+
+    #btnPetunjukNext{
+        font-size:20px;
+        padding:16px 35px;
+        right:30px;
+        bottom:30px;
+    }
+
+    #btnNext{
+        font-size:22px;
+        padding:16px 35px;
+    }
+}
+
+/* =========================
+   HP
+========================= */
+@media (max-width:768px){
+
+    #clickText{
+        width:90%;
+        font-size:22px;
+        line-height:1.4;
+        bottom:60px;
+    }
+
+    #btnPetunjukNext{
+        right:50%;
+        transform:translateX(50%);
+        bottom:25px;
+        width:85%;
+        max-width:350px;
+        font-size:18px;
+        padding:15px 20px;
+    }
+
+    #btnNext{
+        width:85%;
+        max-width:350px;
+        font-size:20px;
+        padding:16px 20px;
+    }
+}
+
+/* =========================
+   HP KECIL
+========================= */
+@media (max-width:480px){
+
+    #clickText{
+        font-size:18px;
+        width:92%;
+        bottom:50px;
+    }
+
+    #btnPetunjukNext{
+        font-size:16px;
+        padding:14px 18px;
+        width:90%;
+    }
+
+    #btnNext{
+        width:90%;
+        font-size:18px;
+        padding:14px 18px;
+    }
+}
+
     </style>
 </head>
 <body>
 <video id="introVideo"
        autoplay
-       controls
+       playsinline
        controlsList="nodownload noplaybackrate nofullscreen"
        disablePictureInPicture>
     <source src="video opening.mp4" type="video/mp4">
