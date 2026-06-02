@@ -22,20 +22,7 @@
         transition:opacity 1s ease;
     }
 
-    #clickText{
-        position:fixed;
-        bottom:80px;
-        left:50%;
-        transform:translateX(-50%);
-        color:white;
-        font-size:30px;
-        font-weight:bold;
-        z-index:15000;
-        opacity:0;
-        transition:opacity .3s ease;
-        text-shadow:0 0 15px rgba(255,255,255,.8);
-        animation:melayang 2s infinite ease-in-out;
-    }
+   
 
     #clickText{
         position:fixed;
@@ -46,6 +33,7 @@
         font-size:34px;
         font-weight:800;
         letter-spacing:1px;
+        text-align: center;
         color:white;
         opacity:0;
         transition:opacity .3s ease;
@@ -55,6 +43,10 @@
             0 0 20px rgba(255,255,255,.5);
         animation:melayang 2s ease-in-out infinite;
     }
+
+    #clickText.show{
+    opacity:1;
+}
 
     @keyframes melayang{
         0%{transform:translateX(-50%) translateY(0);}
@@ -300,10 +292,13 @@ function mulaiPetualangan(){
     setTimeout(() => {
         btnPetunjukNext.classList.add("show");
     }, 10000);
+
+    document.removeEventListener("click", mulaiPetualangan);
+    document.removeEventListener("touchstart", mulaiPetualangan);
 }
 
-document.addEventListener("click", mulaiPetualangan, {once:true});
-document.addEventListener("touchstart", mulaiPetualangan, {once:true});
+document.addEventListener("click", mulaiPetualangan);
+document.addEventListener("touchstart", mulaiPetualangan);
 
 btnPetunjukNext.addEventListener("click", function(){
 
